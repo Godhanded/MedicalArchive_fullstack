@@ -7,10 +7,11 @@
 - [Project Details](#project-description)
 - [Problem Statement](#problem-statement)
 - [Solution](#solution)
+- [How it Works]()
 - [Technologies Used](#technologies-used)
     - [NFT.Storage/IPFS](#nftstorageipfs)
     - [Backend Server/Api](#backend-serverapipython-flask)
-    - [Filecoin Hyperspace Testnet](#filecoin-hyperspace-chain)
+    - [Fantom Testnet Chain](#fantom-testnet-chain)
     - [Smart Contract](#solidity-smart-contracts)
     - [Wagmi Kit](#wagmi-kit)
 - [Important Live Links](#importantlive-hosted-project-links)
@@ -24,9 +25,10 @@
 #
 > ## Project Description
 
-<p><b style="color:orange">Ficave is a decentralised medical documentation system,built on filecoin’s storage network. 
+<p><b style="color:orange">Ficave is a decentralised medical documentation system,built on Fantom network.
+
 Ficave is the first medical ledger on the blockchain,which makes it easy to upload,send,receive,and acess medical data’s on chain .
-</b> Files stored on Ficave are immutable and can’t be accessed without user  permission or password,confidential medical datas can also be stored in private folders. 
+</b> Files stored on Ficave are immutable and can’t be accessed without user  permission or password,confidential medical data can also be stored in private folders. 
 
 <b style="color:orange">FiCave</b> Dapp is free and easy to use,conveniently upload,encrypt and share your medical files with your doctor or consultant. 
 Files uploaded on Ficave can also be made open-source to serve as  research material in the medical dataset,enabling on chain peer-to-peer medical database. 
@@ -39,7 +41,7 @@ Files uploaded on Ficave can also be made open-source to serve as  research mate
 - **Github** > [https://github.com/Godhanded/MedicalArchive_fullstack](https://github.com/Godhanded/MedicalArchive_fullstack)
 
 - **Contract** > 
-    - Hyperspace_fvm [0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3](https://testnet.ftmscan.com/address/0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3#code)
+    - Fantom Testnet [0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3](https://testnet.ftmscan.com/address/0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3#code)
 
     - Contract Code [here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/contracts/MedArchive.sol)
 
@@ -57,6 +59,18 @@ Files stored on Ficave must be immutable and can’t be accessed without user/ho
 Our mission is to make medical records and data more  accessible and safe using the blockchain technology,we envision to build Ficave to stand out as the <b style="color:orange">biggest medical archive</b> for research and documentations,and to eliminate the problem of medical data loss due to physical disasters or tamper. 
 
 [see solution here](#solution)
+
+#
+> ## How it works
+***Note:*** <b style="color:orange">All patients and their records are tied to each hospitals account or wallet address.</b>
+
+hospitals create or adds a patient using their name and that patient is issued a patient Id with which records can be added.
+
+<b style="color:orange">When uploading a Medical record</b> the details are provided and a picture of the record uploaded, before clicking the upload button the hospital provides their password, after this the details are uploaded to Ipfs and a hash is returned, <b style="color:red">This Hash</b> is then sent to our server where it is encrypted with the hospitals' password using fernet encryption, after encrypting, the result or fernet hash is returned and this is stored on the Fi-Cave smart contract and mapped to the hospitals' address.This makes it secure and impossible for one to see private patient records by querying the contracts storage slots as what is returned are incomprehensible.
+
+<b style="color:orange">To view or get patients records</b>, the Id of the patient and the hospitals password is provided, this gets all the records for that patient from the contract and then sends a list or array of all the fernet hashes stored on the contract to our server, our sever then uses the password to decrypt all the members of the list. the server then returns a list or aray of the decrypted hashes which are the actual Ipfs hash or CID , this is collected and rendered on our frontend for the user or Hospital to see and interact with.
+
+
 
 #
 > ## Contributors
@@ -91,15 +105,15 @@ Our mission is to make medical records and data more  accessible and safe using 
 - ### **Backend Server/Api**_**Python Flask**
     - <b style="color: orange">The Api or server</b>, we created performs two functions, encrypt the ipfs cid returned after a file is uploaded and return the encryption which makes use of <b style="color:orange">Fernet Encryption Methods and User defined password</b> to store in our smart contract. [code here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/Backend/securor/__init__.py#L51) and [here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/Backend/securor/__init__.py#L41)
 
-    - Decrypt a list of Fernet hashed nd return the Cids of the decrypted hashes to render on our frontwnd [see here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/Backend/securor/__init__.py#L57)
+    - Decrypt a list of Fernet hashes and return the Cids of the decrypted hashes to render on our frontend [see here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/Backend/securor/__init__.py#L57)
 
     - See Backend Documentation [here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/Backend/README.md)
 
 - ### **NFT.Storage/IPFS**
-    - TWe used the nft.storage npm packed to interact and upload files to ipfs[see here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/frontend_fi/src/components/upload/Upload.jsx#L92) 
+    - We used the nft.storage npm packed to interact and upload files to ipfs[see here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/frontend_fi/src/components/upload/Upload.jsx#L92) 
 
 
-- ### **Filecoin Hyperspace Chain**
+- ### **Fantom Testnet Chain**
     - The contract was <b style="color: orange">deployed on</b>this chain 
 
 
@@ -111,7 +125,7 @@ Our mission is to make medical records and data more  accessible and safe using 
 
 #
 > ## Solution
-<p>FiCave has built as system where Hosppitals Private and public can opload and store medical records unique to each hospital and most expecially private as all records are encrypted or hashed using Fernet encryption and a password provided by each user and this is stored in the smart contrct permanently.
+<p>FiCave has built as system where Hospitals Private and public can upload and store medical records unique to each hospital and most expecially private as all records are encrypted or hashed using Fernet encryption and a password provided by each user and this is stored in the smart contrct permanently.
 Ficave also also fosters research monetixation by allowing users or hospitals to publish medical write ups or research papers for sale at a price specified by said entity.</p>
 <p><b style="color: orange">
 In the nearest of time,doctors or researchers</b> can co-work and share resource data on-chain while working remote using Ficave dapp,and also users can earn incentives from their open source records/data using the Ficave archive by encrypting medical data and setting acess price for people to be able to have acess or ownership to such data.
@@ -119,7 +133,7 @@ In the nearest of time,doctors or researchers</b> can co-work and share resource
 
 
 <p><b style="color:orange">Through Ficave - </b>
-In the nearest of time,doctors or researchers can co-work and share resource data securely on-chain while working remote using Ficave dapp,and also users can earn incentives from their open source records/data using the Ficave archive by encrypting medical data and setting acess price for people to be able to have acess or ownership to such data. 
+In the nearest of time,doctors or researchers can co-work and share resource data securely on-chain while working remote using Ficave dapp,and also users can earn incentives from their open source records/data using the Ficave archive by encrypting medical data and setting access price for people to be able to have acess or ownership to such data. 
 </p>
 
 
