@@ -15,7 +15,6 @@ const Files = () => {
                     <button>
                     <NavLink to={"/upload"}>
                         <FontAwesomeIcon icon={faAdd} />
-                        
                         add new
                     </NavLink>
                     </button>
