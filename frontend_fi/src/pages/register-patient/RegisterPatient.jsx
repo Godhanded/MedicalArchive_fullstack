@@ -10,8 +10,8 @@ const RegisterPatient = () => {
     const [id,setId]=useState({id:"",isWaiting:false});
     const { data, isLoading, writeAsync } = useContractWrite({
         mode: "recklesslyUnprepared",
-        address: address[3141].address,
-        chainId: 3141,
+        address: address[4002].address,
+        chainId: 4002,
         abi: abi,
         args: [patientName],
         functionName: "addPatient",
@@ -21,7 +21,7 @@ const RegisterPatient = () => {
         },
     });
     useContractEvent({
-        address: address[3141].address,
+        address: address[4002].address,
         abi: abi,
         eventName: 'PatientAdded',
         listener(node, label, owner) {

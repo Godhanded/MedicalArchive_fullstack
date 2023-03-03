@@ -15,8 +15,8 @@ const Send = () => {
 
         { isLoading, isSuccess, writeAsync } = useContractWrite({
             mode: "recklesslyUnprepared",
-            address: address[3141].address,
-            chainId: 3141,
+            address: address[4002].address,
+            chainId: 4002,
             abi: abi,
             args: [shareData.to, shareData.patientId, shareData.recordId],
             functionName: "sharePatientsRecord",

@@ -71,8 +71,8 @@ const Record = () => {
 
         contractRead = useContractRead({
             mode: "recklesslyUnprepared",
-            address: addr[3141].address,
-            chainId: 3141,
+            address: addr[4002].address,
+            chainId: 4002,
             abi: abi,
             args: inputs.recordID != "" ? [inputs.patientID, inputs.recordID] : [inputs.patientID],
             functionName: inputs.recordID != "" ? "getPatientRecord" : "getPatientRecords",

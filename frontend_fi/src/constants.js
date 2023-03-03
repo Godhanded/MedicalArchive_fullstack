@@ -1,5 +1,5 @@
 const address={
-    3141: {
+    4002: {
         name: "fantomTestnet",
         address: "0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3",
         url: "https://testnet.ftmscan.com/address/0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3#code",

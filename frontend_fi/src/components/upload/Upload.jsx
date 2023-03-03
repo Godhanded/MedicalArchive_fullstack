@@ -37,8 +37,8 @@ const Upload = () => {
 
         { data, isLoading, isSuccess, writeAsync } = useContractWrite({
             mode: "recklesslyUnprepared",
-            address: address[3141].address,
-            chainId: 3141,
+            address: address[4002].address,
+            chainId: 4002,
             abi: abi,
             args: [cid.patientId, cid.description, cid.hash],
             functionName: "addRecord",
