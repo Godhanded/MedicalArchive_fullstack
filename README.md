@@ -11,7 +11,7 @@
 - [Technologies Used](#technologies-used)
     - [NFT.Storage/IPFS](#nftstorageipfs)
     - [Backend Server/Api](#backend-serverapipython-flask)
-    - [Fantom Testnet Chain](#fantom-testnet-chain)
+    - [Filecoin Hyperspace cChain](#filecoin-hyperspace-chain)
     - [Smart Contract](#solidity-smart-contracts)
     - [Wagmi Kit](#wagmi-kit)
 - [Important Live Links](#importantlive-hosted-project-links)
@@ -41,7 +41,7 @@ Files uploaded on Ficave can also be made open-source to serve as  research mate
 - **Github** > [https://github.com/Godhanded/MedicalArchive_fullstack](https://github.com/Godhanded/MedicalArchive_fullstack)
 
 - **Contract** > 
-    - Fantom Testnet [0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3](https://testnet.ftmscan.com/address/0x92134fF22E609B9A630e9f2528cF3D9E7bc210d3#code)
+   - Hyperspace_fvm [0xF281Afb262bA65fbD9d4BCfb2539aF1D064231ca](https://hyperspace.filfox.info/en/address/0xF281Afb262bA65fbD9d4BCfb2539aF1D064231ca)
 
     - Contract Code [here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/contracts/MedArchive.sol)
 
@@ -94,7 +94,7 @@ hospitals create or adds a patient using their name and that patient is issued a
  | **`React`**         | Frontend                   |
  | **`NFT.Storage/IPFS`**| file upload/retrieval  |
  | **`Wagmi Kit`**       | contract calls       |
- | **`Fantom Testnet Chain`** | Main contract deployed/Tracks all records|
+ | **`Filecoin Hyperspace chain`** | Main contract deployed/Tracks all records|
  | **`Python Flask`**| Encrypt/Decrypt uploaded Records for contract to store|
 
 - ### **Solidity smart contracts**
@@ -113,7 +113,7 @@ hospitals create or adds a patient using their name and that patient is issued a
     - We used the nft.storage npm packed to interact and upload files to ipfs[see here](https://github.com/Godhanded/MedicalArchive_fullstack/blob/main/frontend_fi/src/components/upload/Upload.jsx#L92) 
 
 
-- ### **Fantom Testnet Chain**
+- ### **Filecoin Hyperspace Chain**
     - The contract was <b style="color: orange">deployed on</b>this chain 
 
 
