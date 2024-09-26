@@ -2,19 +2,36 @@ import "./index.scss";
 import { RouterProvider, Outlet, createBrowserRouter } from "react-router-dom";
 import pages from "./pages";
 import components from "./components";
-import { WagmiConfig, createClient } from "wagmi";
-import { filecoinHyperspace } from "wagmi/chains";
-import { ConnectKitProvider, getDefaultClient } from "connectkit";
+import { WagmiProvider,createConfig,http } from "wagmi";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; 
+import { base, baseSepolia } from "wagmi/chains";
+import { coinbaseWallet, injected } from 'wagmi/connectors';
+// import { ConnectKitProvider, getDefaultClient } from "connectkit";
 
 
 const
-  chains = [filecoinHyperspace],
+  queryClient = new QueryClient(),
+  chains = [base,baseSepolia],
 
-  client = createClient(
-    getDefaultClient({
-      appName: "FI-Cave",
-      chains: chains
-    }),
+  client = createConfig(
+    {
+      chains: [baseSepolia],
+      multiInjectedProviderDiscovery: true,
+      connectors: [
+        
+        coinbaseWallet({
+          appName: 'fi_cave',
+          preference: 'smartWalletOnly', // set this to `all` to use EOAs as well
+          version: '4',
+        }),
+        injected(),
+      ],
+      ssr: true,
+      transports: {
+        [base.id]: http(),
+        [baseSepolia.id]: http(),
+      },
+    }
   ),
 
   SignedOutAppLayout = () => {
@@ -95,8 +112,9 @@ const
 
 function App() {
   return (
-    <WagmiConfig client={client}>
-      <ConnectKitProvider >
+    <WagmiProvider config={client}>
+      <QueryClientProvider client={queryClient}>
+      {/* <ConnectKitProvider > */}
         <section className="query">
           <div>
             <span>👋</span>
@@ -110,8 +128,9 @@ function App() {
         <section className="container">
           <RouterProvider router={router} />
         </section>
-      </ConnectKitProvider>
-    </WagmiConfig>
+      {/* </ConnectKitProvider> */}
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }
 

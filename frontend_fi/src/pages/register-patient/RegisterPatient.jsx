@@ -1,7 +1,7 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { address, abi } from "../../constants";
-import { useContractWrite,useContractEvent } from "wagmi";
+import { useContractWrite,useWatchContractEvent } from "wagmi";
 import { useState } from "react";
 import style from "./register.module.scss";
 
@@ -20,7 +20,7 @@ const RegisterPatient = () => {
             setId(prev=>({...prev,isWaiting:true}))
         },
     });
-    useContractEvent({
+    useWatchContractEvent({
         address: address[3141].address,
         abi: abi,
         eventName: 'PatientAdded',

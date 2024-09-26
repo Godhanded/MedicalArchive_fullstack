@@ -2,12 +2,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { faHouse, faFolder, faCloudArrowUp, faPaperPlane, faShareNodes, faBell, faGear, faMagnifyingGlass, faPassport, faClipboardUser, faBoxesPacking } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { ConnectKitButton } from "connectkit";
+// import { ConnectKitButton } from "connectkit";
+import {
+    ConnectWallet,
+    Wallet,
+    WalletDropdown,
+    WalletDropdownBasename, 
+    WalletDropdownFundLink, 
+    WalletDropdownLink, 
+    WalletDropdownDisconnect,
+  } from '@coinbase/onchainkit/wallet';
+  import {
+    Address,
+    Avatar,
+    Name,
+    Identity,
+    EthBalance, 
+  } from '@coinbase/onchainkit/identity';
 import style from "./navbar.module.scss";
 import "./style.css";
+import { useAccount } from "wagmi";
+import { baseSepolia } from 'viem/chains';
 
 const NavbarSignedIn = () => {
     const [user, setUser] = useState("User");
+    const account= useAccount();
 
     return (
         <section className={style.navbar}>
@@ -58,7 +77,36 @@ const NavbarSignedIn = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <ConnectKitButton.Custom>
+                        <Link>
+            <div  className="flex justify-end">
+            <Wallet>
+  <ConnectWallet>
+    <Avatar className="h-6 w-6" />
+    <Name />
+  </ConnectWallet>
+  <WalletDropdown>
+    <Identity 
+      className="px-4 pt-3 pb-2" 
+      hasCopyAddressOnClick
+    >
+      <Avatar />
+      <Name />
+      <Address />
+      <EthBalance />
+    </Identity>
+    <WalletDropdownBasename />
+    <WalletDropdownLink
+      icon="wallet"
+      href="https://keys.coinbase.com"
+    >
+      Wallet
+    </WalletDropdownLink>
+    <WalletDropdownFundLink />
+    <WalletDropdownDisconnect />
+  </WalletDropdown>
+</Wallet></div>
+            </Link>
+                            {/* <ConnectKitButton.Custom>
                                 {({ isConnected, show, truncatedAddress }) => {
                                     return (
                                         <button onClick={show}>
@@ -72,7 +120,7 @@ const NavbarSignedIn = () => {
                                         </button>
                                     );
                                 }}
-                            </ConnectKitButton.Custom>
+                            </ConnectKitButton.Custom> */}
                         </li>
                     </ul>
                 </nav>

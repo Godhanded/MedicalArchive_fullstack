@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coinbase/onchainkit": "^0.33.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
@@ -21,7 +22,7 @@
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "sass": "^1.57.1",
-    "wagmi": "^0.10.15",
+    "wagmi": "^2.12.14",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
