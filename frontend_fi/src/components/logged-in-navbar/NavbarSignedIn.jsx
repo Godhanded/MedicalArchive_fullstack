@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { faHouse, faFolder, faCloudArrowUp, faPaperPlane, faShareNodes, faBell, faGear, faMagnifyingGlass, faPassport, faClipboardUser, faBoxesPacking } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+
 // import { ConnectKitButton } from "connectkit";
 import {
     ConnectWallet,
@@ -77,7 +78,7 @@ const NavbarSignedIn = () => {
                             </NavLink>
                         </li>
                         <li>
-                        <Link>
+
             <div  className="flex justify-end">
             <Wallet>
   <ConnectWallet>
@@ -104,9 +105,7 @@ const NavbarSignedIn = () => {
     <WalletDropdownFundLink />
     <WalletDropdownDisconnect />
   </WalletDropdown>
-</Wallet></div>
-            </Link>
-                            {/* <ConnectKitButton.Custom>
+</Wallet></div>                            {/* <ConnectKitButton.Custom>
                                 {({ isConnected, show, truncatedAddress }) => {
                                     return (
                                         <button onClick={show}>
