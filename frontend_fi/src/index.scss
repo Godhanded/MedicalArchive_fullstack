@@ -80,7 +80,7 @@ body {
             }
         }
 
-        @media only screen and (min-device-width : 1024px) {
+        @media only screen and (min-device-width : 102px) {
             display: none;
         }
     }
@@ -95,7 +95,7 @@ body {
             font-size: inherit;
         }
 
-        @media only screen and (min-device-width : 0px) and (max-device-width : 1024px) {
+        @media only screen and (min-device-width : 0px) and (max-device-width : 102px) {
             display: none;
         }
     }
