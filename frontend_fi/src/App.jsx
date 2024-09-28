@@ -2,6 +2,7 @@ import "./index.scss";
 import { RouterProvider, Outlet, createBrowserRouter } from "react-router-dom";
 import pages from "./pages";
 import components from "./components";
+import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { WagmiProvider,createConfig,http } from "wagmi";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; 
 import { base, baseSepolia } from "wagmi/chains";
@@ -114,6 +115,7 @@ function App() {
   return (
     <WagmiProvider config={client}>
       <QueryClientProvider client={queryClient}>
+      <OnchainKitProvider chain={baseSepolia}>
       {/* <ConnectKitProvider > */}
         <section className="query">
           <div>
@@ -128,6 +130,7 @@ function App() {
         <section className="container">
           <RouterProvider router={router} />
         </section>
+        </OnchainKitProvider>
       {/* </ConnectKitProvider> */}
       </QueryClientProvider>
     </WagmiProvider>

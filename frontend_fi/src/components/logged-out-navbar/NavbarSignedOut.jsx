@@ -42,19 +42,17 @@ const NavbarSignedOut = () => {
                     <li>
                         <Link>files</Link>
                     </li>
-                </ul>
-            </nav>
-            <div  className="wallet">
+    <li className="my-10 flex justify-center">
             <Wallet>
   <ConnectWallet>
-    <Avatar className="h-6 w-6" />
+    <Avatar sizes="1"/>
     <Name />
   </ConnectWallet>
   <WalletDropdown>
     <Identity 
       className="px-4 pt-3 pb-2" 
       hasCopyAddressOnClick
-    >
+      >
       <Avatar />
       <Name />
       <Address />
@@ -64,13 +62,18 @@ const NavbarSignedOut = () => {
     <WalletDropdownLink
       icon="wallet"
       href="https://keys.coinbase.com"
-    >
+      >
       Wallet
     </WalletDropdownLink>
     <WalletDropdownFundLink />
     <WalletDropdownDisconnect />
   </WalletDropdown>
-</Wallet></div>
+</Wallet>
+
+</li>
+      </ul>
+            </nav>
+            
 
             {/* <Link><ConnectKitButton.Custom>
                 {({ isConnected, show, truncatedAddress }) => {
