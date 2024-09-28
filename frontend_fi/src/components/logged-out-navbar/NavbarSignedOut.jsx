@@ -44,8 +44,7 @@ const NavbarSignedOut = () => {
                     </li>
                 </ul>
             </nav>
-            <Link>
-            <div  className="flex justify-end">
+            <div  className="wallet">
             <Wallet>
   <ConnectWallet>
     <Avatar className="h-6 w-6" />
@@ -72,7 +71,7 @@ const NavbarSignedOut = () => {
     <WalletDropdownDisconnect />
   </WalletDropdown>
 </Wallet></div>
-            </Link>
+
             {/* <Link><ConnectKitButton.Custom>
                 {({ isConnected, show, truncatedAddress }) => {
                     return (

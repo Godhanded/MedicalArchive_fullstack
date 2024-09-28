@@ -79,7 +79,7 @@ const NavbarSignedIn = () => {
                         </li>
                         <li>
 
-            <div  className="flex justify-end">
+            <div  >
             <Wallet>
   <ConnectWallet>
     <Avatar className="h-6 w-6" />
