@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/MedArchive.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity 0.8.17;\n\nerror MedArchive__isNotYourPatient();\n\ncontract MedArchive {\n    address public s_owner;\n\n    struct PatientRecord {\n        uint256 id;\n        uint256 date;\n        string description;\n        string cid;\n    }\n\n    struct Patient {\n        uint256 patientId;\n        string patientName;\n        address hospitalAddr;\n    }\n\n    mapping(address => uint256) private s_patientIds;\n    mapping(address => mapping(uint256 => Patient)) private s_hospitalPatients;\n    mapping(address => mapping(uint256 => PatientRecord[])) private s_hospitalRecords;\n    mapping(address => PatientRecord[]) private s_sharedRecords;\n\n    event PatientAdded(address indexed hospitalAddress, uint256 patientId);\n    event NewRecord(address indexed hospitalAddress, uint256 indexed patientId, uint256 recordId);\n    event PatientShared(\n        address indexed hospitalAddress,\n        uint256 indexed patientId,\n        uint256 recordId\n    );\n\n    modifier isYourPatient(uint256 _patientId) {\n        // only authorized address can alter patient record\n        if (s_hospitalPatients[msg.sender][_patientId].hospitalAddr != msg.sender) {\n            revert MedArchive__isNotYourPatient();\n        }\n        _;\n    }\n\n    constructor() {\n        s_owner = msg.sender;\n    }\n\n    function addPatient(string calldata _patientName) external {\n        uint256 id = s_patientIds[msg.sender] += 1;\n        s_hospitalPatients[msg.sender][id] = Patient({\n            patientId: id,\n            patientName: _patientName,\n            hospitalAddr: msg.sender\n        });\n        emit PatientAdded(msg.sender, id);\n    }\n\n    function addRecord(\n        uint256 _patientId,\n        string calldata _description,\n        string calldata _cid\n    ) external isYourPatient(_patientId) {\n        // isYourPatient Modifier already takes care of if patient does not exist\n        uint256 recordId = s_hospitalRecords[msg.sender][_patientId].length;\n        s_hospitalRecords[msg.sender][_patientId].push(\n            PatientRecord({\n                id: recordId,\n                date: block.timestamp,\n                description: _description,\n                cid: _cid\n            })\n        );\n        emit NewRecord(msg.sender, _patientId, recordId);\n    }\n\n    function sharePatientsRecord(\n        address _to,\n        uint256 _patientId,\n        uint256 _recordId\n    ) external isYourPatient(_patientId) {\n        s_sharedRecords[_to].push(s_hospitalRecords[msg.sender][_patientId][_recordId]);\n        emit PatientShared(msg.sender, _patientId, _recordId);\n    }\n\n    function getPatientRecords(uint256 _patientId) external view returns (PatientRecord[] memory) {\n        return s_hospitalRecords[msg.sender][_patientId];\n    }\n\n    function getPatientRecord(\n        uint256 _patientId,\n        uint256 _recordId\n    ) external view returns (PatientRecord memory) {\n        return s_hospitalRecords[msg.sender][_patientId][_recordId];\n    }\n\n    function getPatient(uint256 _patientId) external view returns (Patient memory) {\n        return s_hospitalPatients[msg.sender][_patientId];\n    }\n\n    function getSharedRecords() external view returns (PatientRecord[] memory) {\n        return s_sharedRecords[msg.sender];\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

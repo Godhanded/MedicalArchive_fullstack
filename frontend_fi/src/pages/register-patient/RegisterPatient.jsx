@@ -19,8 +19,8 @@ const RegisterPatient = () => {
     const [id,setId]=useState({id:"",isWaiting:false});
     const { data, isLoading, writeAsync } = useContractWrite({
         mode: "recklesslyUnprepared",
-        address: address[3141].address,
-        chainId: 3141,
+        address: address[84532].address,
+        chainId: 84532,
         abi: abi,
         args: [patientName],
         functionName: "addPatient",
@@ -30,13 +30,13 @@ const RegisterPatient = () => {
         },
     });
     const contract=[{
-        address: address[3141].address,
+        address: address[84532].address,
         abi: abi,
         args: [patientName],
         functionName: "addPatient",
     }]
     useWatchContractEvent({
-        address: address[3141].address,
+        address: address[84532].address,
         abi: abi,
         eventName: 'PatientAdded',
         listener(node, label, owner) {
@@ -48,8 +48,8 @@ const RegisterPatient = () => {
       const handleOnStatus = useCallback((status) => {
         console.log('LifecycleStatus', status);
         if(status.statusName==="success"){
-            console.log(status.statusData.transactionReceipts[0].logs[1])
-            const logs=status.statusData.transactionReceipts[0]["logs"][0]["topics"][1]
+            console.log(status.statusData.transactionReceipts[0].logs[1].data)
+            const logs=status.statusData.transactionReceipts[0].logs[1].data
             setId({isWaiting:false,id:logs??"err"})
         }
       }, []);

@@ -13,7 +13,7 @@ const FVM_RPC_URL= process.env.FVM_RPC_URL;
 // const COINMARKETCAP_API = process.env.COINMARKETCAP_API;
 const FILESCAN_API = process.env.FILESCAN_API;
 module.exports = {
-    defaultNetwork: "fvm",
+    defaultNetwork: "baseSepoila",
     networks: {
         hardhat: {
             chainId: 31337,
@@ -21,6 +21,16 @@ module.exports = {
         },
         fvm: {
             chainId: 3141,
+            blockConfirmations: 2,
+            url: FVM_RPC_URL,
+            saveDeployments: true,
+            accounts: [PRIVATE_KEY1]
+            // accounts:{
+            //     mnemonic: mnemonic
+            // },
+        },
+        baseSepoila: {
+            chainId: 84532,
             blockConfirmations: 2,
             url: FVM_RPC_URL,
             saveDeployments: true,
@@ -39,6 +49,7 @@ module.exports = {
             default: 0,
             1: 0,
             3141: 0,
+
         },
         player: {
             default: 3141,
@@ -58,6 +69,17 @@ module.exports = {
     etherscan: {
         apiKey: {
             fvm: FILESCAN_API,
+            baseSepoila: FILESCAN_API,
         },
+        customChains: [
+            {
+              network: "baseSepoila",
+              chainId: 84532,
+              urls: {
+                apiURL: "https://api-sepolia.basescan.org/api",
+                browserURL: "https://sepolia.basescan.org"
+              }
+            }
+          ]
     },
 };
