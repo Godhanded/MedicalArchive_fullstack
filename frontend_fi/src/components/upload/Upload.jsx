@@ -4,8 +4,16 @@ import { NFTStorage } from "nft.storage";
 import { address, abi } from "../../constants";
 import { useContractWrite } from "wagmi";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import style from "./upload.module.scss";
+import { 
+    Transaction, 
+    TransactionButton,
+    TransactionSponsor,
+    TransactionStatus,
+    TransactionStatusAction,
+    TransactionStatusLabel,
+  } from '@coinbase/onchainkit/transaction'; 
 
 const Upload = () => {
     const
@@ -26,6 +34,10 @@ const Upload = () => {
             return text;
         },
 
+        handleOnStatus = useCallback((status) => {
+            console.log('LifecycleStatus', status);
+        }, []),
+
         text = button(),
 
         [cid, setCid] = useState({
@@ -43,6 +55,13 @@ const Upload = () => {
             args: [cid.patientId, cid.description, cid.hash],
             functionName: "addRecord",
         });
+
+        const contract=[{
+            address: address[3141].address,
+            abi: abi,
+            args: [cid.patientId, cid.description, cid.hash],
+            functionName: "addRecord",
+        }]
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -163,7 +182,20 @@ const Upload = () => {
             </ul>
 
             <div>
-                <button disabled={!writeAsync} onClick={async () => await writeAsync()}>
+                <Transaction
+                    chainId={84532}
+                    contracts={contract}
+                    onStatus={handleOnStatus}
+                    
+                    >
+                    <TransactionButton text={pathname == "/send" ? "Send" : "Upload File/s"} />
+                    <TransactionSponsor />
+                    <TransactionStatus>
+                        <TransactionStatusLabel />
+                        <TransactionStatusAction />
+                    </TransactionStatus>
+                </Transaction>
+                {/* <button disabled={!writeAsync} onClick={async () => await writeAsync()}>
                     {files.length > 1 ? `${text} all ${files.length} files` : `${text} file`}
                     <span>
                         {isLoading && (
@@ -171,7 +203,7 @@ const Upload = () => {
                         )}
                     </span>
                     <span>{isSuccess && "success"}</span>
-                </button>
+                </button> */}
             </div>
         </div>
     );
