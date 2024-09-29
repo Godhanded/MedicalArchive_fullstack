@@ -74,8 +74,8 @@ const Archive = () => {
                     <label htmlFor="price">enter price</label>
                     <input type="number" placeholder="Min: 0.25" />
                     <div>
-                        <span>1.34 Fil</span>
-                        <span>Balance: 34 Fil</span>
+                        <span>1.34 Eth</span>
+                        <span>Balance: 34 Eth</span>
                     </div>
                 </div>
 
